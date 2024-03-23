@@ -24,6 +24,7 @@ func NewApi(port string, judicialClient *judicial.JudicialServiceClient, userCli
 	api.judicialClient = judicialClient
 	api.userClient = userClient
 	api.jwtRedeemer = jwtRedeemer
+	api.router = mux.NewRouter()
 	api.registerHandlers()
 	return api, true
 }
