@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	judicial "github.com/cbotte21/judicial-go/pb"
 	"github.com/cbotte21/microservice-common/pkg/datastore"
 	"github.com/cbotte21/microservice-common/pkg/environment"
@@ -13,6 +12,9 @@ import (
 )
 
 func main() {
+	environment.VerifyEnvVariable("port")
+	environment.VerifyEnvVariable("judicial_addr")
+
 	port := environment.GetEnvVariable("port")
 
 	userClient := datastore.RedisClient[schema.ActiveUser]{}
@@ -27,7 +29,6 @@ func main() {
 
 func getJudicialConn() *grpc.ClientConn {
 	var conn *grpc.ClientConn
-	fmt.Println(environment.GetEnvVariable("judicial_addr"))
 	conn, err := grpc.Dial(environment.GetEnvVariable("judicial_addr"), grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf(err.Error())
