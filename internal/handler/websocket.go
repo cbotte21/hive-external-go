@@ -81,6 +81,9 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 		// Decode jwt
 		res, err := jwtRedeemer.Redeem(string(p))
 		if err != nil {
+			fmt.Println("Failed to redeem jwt")
+			fmt.Println(err)
+			fmt.Println(res)
 			break
 		}
 		user.Id = res.Id
