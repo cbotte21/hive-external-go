@@ -80,8 +80,7 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 
 		// Decode jwt
 		res, err := jwtParser.Redeem(string(p))
-		fmt.Println(err)
-		fmt.Println(res)
+		fmt.Println("res", res)
 		select {}
 
 		//user.Id = res.Id
