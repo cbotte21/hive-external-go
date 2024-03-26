@@ -12,6 +12,8 @@ github.com/cbotte21/microservice-common v0.0.0-20240326205758-78b4bbd5f4f9 h1:j3
 github.com/cbotte21/microservice-common v0.0.0-20240326205758-78b4bbd5f4f9/go.mod h1:TnZk14Gycb/wBi5pW9yxhiUIaocThAYs8TIZi+deb+8=
 github.com/cbotte21/microservice-common v0.0.0-20240326210550-71864e53f485 h1:LgzgHGmLtU37lG5cAlfax/QZtCgtK8vmASi/TGOkjFA=
 github.com/cbotte21/microservice-common v0.0.0-20240326210550-71864e53f485/go.mod h1:TnZk14Gycb/wBi5pW9yxhiUIaocThAYs8TIZi+deb+8=
+github.com/cbotte21/microservice-common v0.0.0-20240326221959-4d6e2a42a923 h1:geTmv81B8blUmcN9r7AZNDbIYWjhZBam0YlfNL805HA=
+github.com/cbotte21/microservice-common v0.0.0-20240326221959-4d6e2a42a923/go.mod h1:TnZk14Gycb/wBi5pW9yxhiUIaocThAYs8TIZi+deb+8=
 github.com/cespare/xxhash/v2 v2.2.0 h1:DC2CZ1Ep5Y4k3ZQ899DldepgrayRUGE6BBZ/cd9Cj44=
 github.com/cespare/xxhash/v2 v2.2.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=

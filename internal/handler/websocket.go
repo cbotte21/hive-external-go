@@ -85,18 +85,16 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 		// Check player integrity
 		err = integrity(judicialClient, user.Id)
 		if err != nil {
-			fmt.Printf(err.Error())
+			conn.WriteMessage(0, []byte(err.Error()))
 			break
 		}
 
 		// Login
 		err = login(userClient, user)
 		if err != nil {
-			fmt.Printf(err.Error())
+			conn.WriteMessage(0, []byte(err.Error()))
 			break
 		}
-
-		fmt.Printf("User authenticated... Awaiting kick!")
 
 		//Handle kicks
 		go handleKicks(userClient, &kicked, user.Id)
