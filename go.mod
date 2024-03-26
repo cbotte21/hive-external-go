@@ -4,7 +4,7 @@ go 1.22rc2
 
 require (
 	github.com/cbotte21/judicial-go v0.0.0-20230516025731-39dec33305eb
-	github.com/cbotte21/microservice-common v0.0.0-20240326194354-15ef5fa3fa82
+	github.com/cbotte21/microservice-common v0.0.0-20240326205758-78b4bbd5f4f9
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/websocket v1.5.1
 	google.golang.org/grpc v1.55.0
