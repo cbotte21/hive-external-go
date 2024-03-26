@@ -15,7 +15,7 @@ func main() {
 	environment.VerifyEnvVariable("port")
 	environment.VerifyEnvVariable("judicial_addr")
 	environment.VerifyEnvVariable("keycloak_url")
-	environment.VerifyEnvVariable("keycloak_clientid")
+	environment.VerifyEnvVariable("keycloak_id")
 	environment.VerifyEnvVariable("keycloak_secret")
 	environment.VerifyEnvVariable("keycloak_realm")
 
