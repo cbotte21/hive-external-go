@@ -76,8 +76,6 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 			break
 		}
 
-		fmt.Printf("Authentication request: <jwt> %s\n", p) // TODO: DEBUG
-
 		// Decode jwt
 		res, err := jwtParser.Redeem(string(p))
 
@@ -97,6 +95,7 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 		// Login
 		err = login(userClient, user)
 		if err != nil {
+			fmt.Printf(err.Error())
 			break
 		}
 
