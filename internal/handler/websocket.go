@@ -98,7 +98,8 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 
 		//Handle kicks
 		go handleKicks(userClient, &kicked, user.Id)
-		for !kicked {
+		for !kicked && err == nil {
+			_, _, err = conn.NextReader()
 		}
 		break
 	}
