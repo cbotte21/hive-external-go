@@ -14,15 +14,23 @@ import (
 func main() {
 	environment.VerifyEnvVariable("port")
 	environment.VerifyEnvVariable("judicial_addr")
+	environment.VerifyEnvVariable("keycloak_url")
+	environment.VerifyEnvVariable("keycloak_clientid")
+	environment.VerifyEnvVariable("keycloak_secret")
+	environment.VerifyEnvVariable("keycloak_realm")
 
 	port := environment.GetEnvVariable("port")
+	keycloakUrl := environment.GetEnvVariable("keycloak_url")
+	keycloakId := environment.GetEnvVariable("keycloak_id")
+	keycloakSecret := environment.GetEnvVariable("keycloak_secret")
+	keycloakRealm := environment.GetEnvVariable("keycloak_realm")
 
 	userClient := datastore.RedisClient[schema.ActiveUser]{}
 	judicialClient := judicial.NewJudicialServiceClient(getJudicialConn())
-	jwtRedeemer := jwtParser.JwtSecret(environment.GetEnvVariable("jwt_secret"))
+	tokenParser := jwtParser.NewJwtParser(keycloakId, keycloakSecret, keycloakRealm, keycloakUrl)
 	userClient.Init()
 
-	api, _ := service.NewApi(port, &judicialClient, &userClient, &jwtRedeemer)
+	api, _ := service.NewApi(port, &judicialClient, &userClient, tokenParser)
 
 	_ = api.Start()
 }

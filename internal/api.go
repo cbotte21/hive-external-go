@@ -15,15 +15,15 @@ type Api struct {
 	router         *mux.Router
 	judicialClient *judicial.JudicialServiceClient
 	userClient     *datastore.RedisClient[schema.ActiveUser]
-	jwtRedeemer    *jwtParser.JwtSecret
+	jwtParser      *jwtParser.JwtParser
 }
 
-func NewApi(port string, judicialClient *judicial.JudicialServiceClient, userClient *datastore.RedisClient[schema.ActiveUser], jwtRedeemer *jwtParser.JwtSecret) (*Api, bool) {
+func NewApi(port string, judicialClient *judicial.JudicialServiceClient, userClient *datastore.RedisClient[schema.ActiveUser], jwtParser *jwtParser.JwtParser) (*Api, bool) {
 	api := &Api{}
 	api.port = port
 	api.judicialClient = judicialClient
 	api.userClient = userClient
-	api.jwtRedeemer = jwtRedeemer
+	api.jwtParser = jwtParser
 	api.router = mux.NewRouter()
 	api.registerHandlers()
 	return api, true
@@ -36,6 +36,6 @@ func (api *Api) Start() error { //maybe change return to bool
 func (api *Api) registerHandlers() { //Add all API handlers here
 	api.router.HandleFunc("/", handler.Status)
 	api.router.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		handler.Websocket(w, r, api.userClient, api.judicialClient, api.jwtRedeemer)
+		handler.Websocket(w, r, api.userClient, api.judicialClient, api.jwtParser)
 	})
 }

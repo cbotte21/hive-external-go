@@ -52,7 +52,7 @@ func integrity(judicialClient *judicial.JudicialServiceClient, _id string) error
 	return nil
 }
 
-func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.RedisClient[schema.ActiveUser], judicialClient *judicial.JudicialServiceClient, jwtRedeemer *jwtParser.JwtSecret) {
+func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.RedisClient[schema.ActiveUser], judicialClient *judicial.JudicialServiceClient, jwtParser *jwtParser.JwtParser) {
 	// Session variables
 	kicked := false
 	user := schema.ActiveUser{
@@ -79,15 +79,13 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 		fmt.Printf("Authentication request: <jwt> %s\n", p) // TODO: DEBUG
 
 		// Decode jwt
-		res, err := jwtRedeemer.Redeem(string(p))
-		if err != nil {
-			fmt.Println("Failed to redeem jwt")
-			fmt.Println(err)
-			fmt.Println(res)
-			break
-		}
-		user.Id = res.Id
-		user.Role = res.Role
+		res, err := jwtParser.Redeem(string(p))
+		fmt.Println(err)
+		fmt.Println(res)
+		select {}
+
+		//user.Id = res.Id
+		//user.Role = res.Role
 
 		// Check player integrity
 		err = integrity(judicialClient, user.Id)
