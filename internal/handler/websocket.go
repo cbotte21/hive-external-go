@@ -84,17 +84,23 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 		user.Id, _ = res.GetSubject()
 		user.Role = 0 // TODO: Set based on claim role
 
+		fmt.Println("Checking integrity", user.Id)
+
 		// Check player integrity
 		err = integrity(judicialClient, user.Id)
 		if err != nil {
 			break
 		}
 
+		fmt.Printf("User is not banned")
+
 		// Login
 		err = login(userClient, user)
 		if err != nil {
 			break
 		}
+
+		fmt.Printf("Logged in")
 
 		//Handle kicks
 		go handleKicks(userClient, &kicked, user.Id)
