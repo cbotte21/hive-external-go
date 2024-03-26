@@ -87,6 +87,7 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 		// Check player integrity
 		err = integrity(judicialClient, user.Id)
 		if err != nil {
+			fmt.Printf(err.Error())
 			break
 		}
 
