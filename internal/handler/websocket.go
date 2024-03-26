@@ -21,6 +21,7 @@ var upgrader = websocket.Upgrader{
 func gracefullyDisconnect(userClient *datastore.RedisClient[schema.ActiveUser], conn *websocket.Conn, user schema.ActiveUser) {
 	_ = conn.Close()
 	//Remove from redis
+	fmt.Println("Graceful disconnect called")
 	if user.Id != "" {
 		_ = userClient.Delete(user)
 	}
