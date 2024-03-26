@@ -18,14 +18,11 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
-func gracefullyDisconnect(userClient *datastore.RedisClient[schema.ActiveUser], conn *websocket.Conn, user schema.ActiveUser) {
+func gracefullyDisconnect(userClient *datastore.RedisClient[schema.ActiveUser], conn *websocket.Conn, user *schema.ActiveUser) {
 	_ = conn.Close()
 	//Remove from redis
-	fmt.Println("Graceful disconnect called")
-	fmt.Println(user)
 	if user.Id != "" {
-		err := userClient.Delete(user)
-		fmt.Println(err)
+		_ = userClient.Delete(*user)
 	}
 }
 
@@ -69,7 +66,7 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 		fmt.Println("Error upgrading to WebSocket:", err)
 		return
 	}
-	defer gracefullyDisconnect(userClient, conn, user)
+	defer gracefullyDisconnect(userClient, conn, &user)
 
 	// Act on message
 	for {
