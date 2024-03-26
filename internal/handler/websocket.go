@@ -22,8 +22,10 @@ func gracefullyDisconnect(userClient *datastore.RedisClient[schema.ActiveUser], 
 	_ = conn.Close()
 	//Remove from redis
 	fmt.Println("Graceful disconnect called")
+	fmt.Println(user)
 	if user.Id != "" {
-		_ = userClient.Delete(user)
+		err := userClient.Delete(user)
+		fmt.Println(err)
 	}
 }
 
