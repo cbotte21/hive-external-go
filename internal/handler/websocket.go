@@ -80,11 +80,9 @@ func Websocket(w http.ResponseWriter, r *http.Request, userClient *datastore.Red
 
 		// Decode jwt
 		res, err := jwtParser.Redeem(string(p))
-		fmt.Println("res", res)
-		select {}
 
-		//user.Id = res.Id
-		//user.Role = res.Role
+		user.Id, _ = res.GetSubject()
+		user.Role = 0 // TODO: Set based on claim role
 
 		// Check player integrity
 		err = integrity(judicialClient, user.Id)
